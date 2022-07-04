@@ -49,6 +49,8 @@ class ArticlesController extends AbstractController {
                 'id' => 4
             ],
         ];
+//        on renvoit le contenu du tableau grâce à this et l'héritage vers le fichier twig avec pour variable articles
+
         return $this->render('articles.html.twig',['articles'=>$articles]);
     }
 
@@ -98,6 +100,8 @@ class ArticlesController extends AbstractController {
                 'id' => 4
             ],
         ];
+//        on renvoit le contenu du tableau grâce à this et l'héritage vers le fichier twig avec pour variable articles
+//        et ici c'est l'id qui permettra d'afficher l'article correspondant
         return $this->render('article.html.twig',['articles'=>$articles[$id]]);
 
     }

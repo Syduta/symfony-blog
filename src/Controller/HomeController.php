@@ -51,7 +51,7 @@ class HomeController extends AbstractController {
                 'id' => 4
             ],
         ];
-        
+//        on renvoit le contenu du tableau grâce à this et l'héritage vers le fichier twig avec pour variable articles
         return $this->render('home.html.twig',['articles'=>$articles]);
     }
 }
