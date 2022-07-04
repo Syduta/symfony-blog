@@ -25,15 +25,14 @@ li a:hover{
 }
 
 p{
-    margin: 0 10rem;
+    margin: 0.5rem 10rem;
     font-size: 1.2rem;
+
 }
 
-img{
-    height: 60vh;
-    width: 60vw;
-    margin: 1.5rem 0;
-
+.images img{
+    height: 80vh;
+    width: 80vw;
 }
 
 nav{
@@ -64,7 +63,7 @@ h2{
 }
 
 article a{
-    margin: auto auto;
+
     text-decoration: none;
     margin: 0rem 1rem;
     border: 1px solid white;
