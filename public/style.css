@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+li a{
+    text-decoration: none;
+    margin: 0rem 1rem;
+    border: 1px solid white;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    background-color: white;
+    color: chocolate;
+    transition: 0.5ms;
+}
+
+li a:hover{
+    background-color: chocolate;
+    color: white;
+}
+
+img{
+    height: 60vh;
+    width: 60vw;
+    margin: 1.5rem 0;
+
+}
+
+nav{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: chocolate;
+    padding: 1.5rem;
+
+}
+
+article{
+
+    text-align: center;
+
+}
+
+h2{
+    margin: 1.5rem 0;
+}
+
+article a{
+    margin: auto auto;
+    text-decoration: none;
+    margin: 0rem 1rem;
+    border: 1px solid white;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    background-color: white;
+    color: chocolate;
+}

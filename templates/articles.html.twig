@@ -1,0 +1,18 @@
+{% include '_header.html.twig' %}
+
+{% for article in articles  %}
+    {% if article.isPublished  %}
+
+        <article>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.description }}</p>
+            <p>{{ article.publishedAt|date ('d-M-y') }}</p>
+            <p>{{ article.author }}</p>
+            <img src="{{ article.image }}" alt="photo auteur">
+            <a href="{{ path('article',{'id':article.id}) }}">Voir l'article</a>
+        </article>
+
+    {% endif %}
+{% endfor %}
+
+{% include '_footer.html.twig' %}

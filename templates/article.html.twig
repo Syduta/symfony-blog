@@ -1,0 +1,17 @@
+{% include '_header.html.twig' %}
+
+
+    {% if articles.isPublished  %}
+
+        <article>
+            <h2>{{ articles.title }}</h2>
+            <p>{{ articles.description }}</p>
+            <p>{{ articles.publishedAt|date ('d-M-y') }}</p>
+            <p>{{ articles.author }}</p>
+            <img src="{{ articles.image }}" alt="photo auteur">
+        </article>
+
+    {% endif %}
+
+
+{% include '_footer.html.twig' %}
