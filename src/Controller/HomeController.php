@@ -51,7 +51,7 @@ class HomeController extends AbstractController {
                 'id' => 4
             ],
         ];
-
+        
         return $this->render('home.html.twig',['articles'=>$articles]);
     }
 }

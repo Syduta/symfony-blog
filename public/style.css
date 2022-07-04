@@ -24,6 +24,10 @@ li a:hover{
     color: white;
 }
 
+p{
+    margin: 0 5rem;
+}
+
 img{
     height: 60vh;
     width: 60vw;
@@ -42,7 +46,9 @@ nav{
 }
 
 article{
-
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
 
 }
@@ -58,6 +64,12 @@ article a{
     border: 1px solid white;
     padding: 0.5rem 0.5rem;
     border-radius: 5px;
+    background-color: chocolate;
+    color: white;
+
+}
+
+article a:hover{
     background-color: white;
     color: chocolate;
 }
