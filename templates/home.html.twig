@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
+    {#cette page hérite de base#}
 
 {% block main %}
+{#    ce qui suit est assemblé avec base#}
 
 <form action="{{ path('home') }}" method="get">
     <label for="name"></label>
@@ -26,4 +28,5 @@
 {% endfor %}
 
 {% endblock %}
+{#    fin assemblage#}
 
