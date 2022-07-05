@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController {
@@ -10,8 +12,14 @@ class HomeController extends AbstractController {
      * @Route("/",name="home");
      */
 
-    public function home(){
+
+    public function home(Request $request){
 //        dd("coucou");
+        $age = $request->query->get('age');
+        $name = $request->query->get('name');
+        if($age>=18){
+            return $this->redirectToRoute("poker");
+        }
 
         $articles = [
             1 => [

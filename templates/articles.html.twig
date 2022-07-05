@@ -1,4 +1,6 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block main %}
 
 {% for article in articles  %}
     {% if article.isPublished  %}
@@ -15,4 +17,4 @@
     {% endif %}
 {% endfor %}
 
-{% include '_footer.html.twig' %}
+{% endblock %}
