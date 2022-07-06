@@ -1,42 +1,109 @@
 <?php
 
 namespace App\Entity;
+
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-//on utilise doctrine pour créer/trouver/migrer bdd
+
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
-//ici symfony capte grâce à orm qu' entity pour la transformation en bdd
-//on crée un entitée class article grâce à orm
 class Article
-//article sera une table
 {
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
      */
-    public $id;
-    //id sera un champ de la table
+    private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    public $title;
-    //title aussi
+    private $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    public $image;
+    private $image;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    public $isPublished;
+    private $isPublished;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    public $author;
+    private $author;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $content;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function isIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }
