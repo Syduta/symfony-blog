@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -104,5 +105,28 @@ class ArticlesController extends AbstractController {
 //        et ici c'est l'id qui permettra d'afficher l'article correspondant
         return $this->render('article.html.twig',['articles'=>$articles[$id]]);
 
+    }
+
+    /**
+     * @Route("/new-article,name="new-article");
+     */
+
+    //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
+    public function newArticle(EntityManagerInterface $entityManager){
+
+        //avec $article on crée un nouvel article grâce à l'instance new article
+        $article = new Article();
+
+        //on utilise les setters pour définir chaque champ
+        $article->setTitle("mal au casque");
+        $article->setContent("on a tous la tronche de travers avec cette partie");
+        $article->setAuthor("le plus beau de tous les rebeus");
+        $article->setIsPublished(true);
+        $article->setImage("https://cd1.rap2france.com/public/medias/news/8668/660x330/mdpi/arouf-gangsta-dans-la-sauce-suite-a-des-accusations-de-pedophilie-1609593947.jpg");
+
+        //on balance tous les champs dans la bdd
+        $entityManager->persist($article);
+        //
+        $entityManager->flush();
     }
 }
