@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -108,7 +109,7 @@ class ArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/new-article,name="new-article");
+     * @Route("/new-article",name="new-article");
      */
 
     //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
@@ -128,5 +129,6 @@ class ArticlesController extends AbstractController {
         $entityManager->persist($article);
         //
         $entityManager->flush();
+        dump($article); die;
     }
 }
