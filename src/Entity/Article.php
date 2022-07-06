@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-//ici symfony capte grâce à orm qu' entity n'est pas une route mais un outil pour la transformation en bdd
+//ici symfony capte grâce à orm qu' entity pour la transformation en bdd
 //on crée un entitée class article grâce à orm
 class Article
 //article sera une table
@@ -24,4 +24,19 @@ class Article
      */
     public $title;
     //title aussi
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    public $isPublished;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $author;
 }
