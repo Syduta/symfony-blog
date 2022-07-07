@@ -22,6 +22,15 @@ class CategoriesController extends AbstractController
     }
 
     /**
+     * @Route("/data-categories",name="data-categories");
+     */
+    // on configure la méthode en l'instanciant avec categoryrepository pour récupérer entièrement la table category
+    public function dataCategories(CategoryRepository $categoryRepository){
+        $categories = $categoryRepository->findAll();
+        dd($categories);
+    }
+
+    /**
      * @Route("new-category",name="new-category");
      */
 

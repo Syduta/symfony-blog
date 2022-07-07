@@ -20,6 +20,15 @@ class ArticlesController extends AbstractController {
     }
 
     /**
+     * @Route("/data-articles",name="data-articles");
+     */
+    // on configure la méthode en l'instanciant avec articlerepository pour récupérer les articles de la table
+    public function dataArticles(ArticleRepository $articleRepository){
+        $articles = $articleRepository->findAll();
+        dd($articles);
+    }
+
+    /**
      * @Route("/articles",name="articles");
      */
 
