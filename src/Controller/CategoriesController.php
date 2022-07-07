@@ -16,7 +16,7 @@ class CategoriesController extends AbstractController
      * @Route("/data-category",name="data-category");
      */
     // on configure la méthode en l'instanciant avec categoryrepository pour récupérer une category grâce à son id
-    public function dataArticle(CategoryRepository $categoryRepository){
+    public function dataCategory(CategoryRepository $categoryRepository){
         $category = $categoryRepository->find(1);
         dd($category);
     }
