@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+    {#cette page hérite de base#}
+
+
+{% block main %}
+    {#    ce qui suit est assemblé avec base#}
+
+    {% for category in categories  %}
+        {% if category.isPublished  %}
+
+            <article>
+                <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
+                <p>{{ category.description }}</p>
+                {#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
+{#                <p>citation de {{ article.author }}</p>#}
+{#                <a class="images" href="{{ path('article',{'id':article.id}) }}"><img src="{{ article.image }}" alt="photo du film"></a>#}
+                <a href="{{ path('category',{'id':category.id}) }}">Voir la catégorie</a>
+            </article>
+
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
+{#    fin assemblage#}
+

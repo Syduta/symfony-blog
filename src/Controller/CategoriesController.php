@@ -13,21 +13,21 @@ class CategoriesController extends AbstractController
 {
 
     /**
-     * @Route("/data-category",name="data-category");
+     * @Route("/category/{id}",name="category");
      */
     // on configure la méthode en l'instanciant avec categoryrepository pour récupérer une category grâce à son id
-    public function dataCategory(CategoryRepository $categoryRepository){
-        $category = $categoryRepository->find(1);
-        dd($category);
+    public function dataCategory(CategoryRepository $categoryRepository,$id){
+        $category = $categoryRepository->find($id);
+        return $this->render('category.html.twig',['category'=>$category]);
     }
 
     /**
-     * @Route("/data-categories",name="data-categories");
+     * @Route("/categories",name="categories");
      */
     // on configure la méthode en l'instanciant avec categoryrepository pour récupérer entièrement la table category
     public function dataCategories(CategoryRepository $categoryRepository){
         $categories = $categoryRepository->findAll();
-        dd($categories);
+        return $this->render('categories.html.twig',['categories'=>$categories]);
     }
 
     /**
@@ -38,15 +38,13 @@ class CategoriesController extends AbstractController
     {
 
         //avec $category on crée une nouvelle catégorie grâce à l'instance new Category
-        $category = new Article();
-//        ou new Category();
+        $category = new Category();
+
         //on utilise les setters pour définir chaque champ
-        $category->setTitle("le troisième");
-        $category->setImage("https://i.redd.it/gc8sohxas5a91.jpg");
-        $category->setContent('reddit image');
+        $category->setTitle("tinder");
+        $category->setColor("red");
+        $category->setDescription("zééé parti");
         $category->setIsPublished(true);
-        $category->setAuthor("quelqu'un");
-        $category->setKikoulol("lol");
 
         //on balance tous les champs dans la bdd
         $entityManager->persist($category);
