@@ -4,11 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 class CategoriesController extends AbstractController
 {
+
+    /**
+     * @Route("/data-category",name="data-category");
+     */
+    // on configure la méthode en l'instanciant avec categoryrepository pour récupérer une category grâce à son id
+    public function dataArticle(CategoryRepository $categoryRepository){
+        $category = $categoryRepository->find(1);
+        dd($category);
+    }
+
     /**
      * @Route("new-category",name="new-category");
      */
