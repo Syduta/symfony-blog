@@ -41,11 +41,11 @@ class CategoriesController extends AbstractController
         $category = new Article();
 //        ou new Category();
         //on utilise les setters pour définir chaque champ
-        $category->setTitle("ça vient");
-        $category->setImage("https://i.redd.it/dv3nbmpi11a91.png");
-        $category->setContent('c\'est pour l\'honneur');
+        $category->setTitle("le troisième");
+        $category->setImage("https://i.redd.it/gc8sohxas5a91.jpg");
+        $category->setContent('reddit image');
         $category->setIsPublished(true);
-        $category->setAuthor("zuki");
+        $category->setAuthor("quelqu'un");
         $category->setKikoulol("lol");
 
         //on balance tous les champs dans la bdd

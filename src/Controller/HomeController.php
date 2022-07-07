@@ -18,15 +18,15 @@ class HomeController extends AbstractController {
 ////        dd("coucou");
 //        $age = $request->query->get('age');
 //        $name = $request->query->get('name');
-//        if($age>=18){
+//        if($request->query->has('age') && $age>=18){
 //            return $this->redirectToRoute("poker");
 //        }
-//}
+//    }
 
         public function home(ArticleRepository $articleRepository){
         // on configure la méthode en l'instanciant avec articlerepository pour récupérer les articles de la table
-
-            $articles = $articleRepository->findAll();
+            //on affiche les derniers articles en premier on se limite à 3
+            $articles = $articleRepository->findBy([],['id'=>'DESC'],3);
             return $this->render('home.html.twig',['articles'=>$articles]);
         }
 
