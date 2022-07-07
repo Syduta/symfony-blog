@@ -151,4 +151,25 @@ class ArticlesController extends AbstractController {
         $entityManager->flush();
         dump($article); die;
     }
+
+    /**
+     * @Route("/articles/delete/{id}",name="delete-article");
+     */
+
+    // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
+        //là on récupère l'id dans la variable article
+        $article = $articleRepository->find($id);
+
+        //si l'id existe on supprime et on push la différence dans la bdd
+        if(!is_null($article)){
+            $entityManager->remove($article);
+            $entityManager->flush();
+            //redirection vers home
+            return $this->redirectToRoute('home');
+        }else{
+            //message d'erreur
+            return ('erreur déjà supprimé');
+        }
+    }
 }
