@@ -3,11 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticlesController extends AbstractController {
+
+    /**
+     * @Route("/data-article",name="data-article");
+     */
+    // on configure la méthode en l'instanciant avec articlerepository pour récupérer un article grâce à son id
+    public function dataArticle(ArticleRepository $articleRepository){
+        $article = $articleRepository->find(1);
+        dd($article);
+    }
+
     /**
      * @Route("/articles",name="articles");
      */
