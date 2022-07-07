@@ -2,20 +2,20 @@
     {#cette page hérite de base#}
 
 {% block title %}
-    <title>{{ articles.title }}</title>
+    <title>{{ article.title }}</title>
 {% endblock %}
 
 {% block main %}
     {#    ce qui suit est assemblé avec base#}
 
-    {% if articles.isPublished  %}
+    {% if article.isPublished  %}
 
         <article>
-            <h2>{{ articles.title }}</h2>
-            <p>{{ articles.description }}</p>
-            <p>posté le {{ articles.publishedAt|date ('d-M-y') }}</p>
-            <p>citation de {{ articles.author }}</p>
-            <img src="{{ articles.image }}" alt="photo du film">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+{#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
+            <p>citation de {{ article.author }}</p>
+            <img src="{{ article.image }}" alt="photo du film">
         </article>
 
     {% endif %}
@@ -25,5 +25,5 @@
 {#    fin assemblage#}
 
 {% block footer %}
-    <li class="footer-element">{{ articles.title }}</li>
+    <li class="footer-element">{{ article.title }}</li>
 {% endblock %}

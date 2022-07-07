@@ -12,13 +12,14 @@
     <button>Envoyer</button>
 </form>
 
-{% for article in articles|slice(1)  %}
+{% for article in articles  %}
+{#    |slice(1)#}
 {% if article.isPublished  %}
 
 <article>
     <h2>{{ article.title }}</h2>
-    <p>{{ article.description }}</p>
-    <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>
+    <p>{{ article.content }}</p>
+{#    <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
     <p>citation de {{ article.author }}</p>
     <a class="images" href="{{ path('article',{'id':article.id}) }}"><img src="{{ article.image }}" alt="photo du film"></a>
     <a href="{{ path('article',{'id':article.id}) }}">Voir l'article</a>

@@ -38,13 +38,15 @@ class CategoriesController extends AbstractController
     {
 
         //avec $category on crée une nouvelle catégorie grâce à l'instance new Category
-        $category = new Category();
-
+        $category = new Article();
+//        ou new Category();
         //on utilise les setters pour définir chaque champ
-        $category->setTitle("copié-collé");
-        $category->setColor("chartreuse");
-        $category->setDescription("avec le raccourci clavier svp");
+        $category->setTitle("ça vient");
+        $category->setImage("https://i.redd.it/dv3nbmpi11a91.png");
+        $category->setContent('c\'est pour l\'honneur');
         $category->setIsPublished(true);
+        $category->setAuthor("zuki");
+        $category->setKikoulol("lol");
 
         //on balance tous les champs dans la bdd
         $entityManager->persist($category);
