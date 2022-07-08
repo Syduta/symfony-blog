@@ -139,16 +139,18 @@ class AdminArticlesController extends AbstractController {
         $article = new Article();
 
         //on utilise les setters pour définir chaque champ
-        $article->setTitle("mal au casque");
-        $article->setContent("on a tous la tronche de travers avec cette partie");
-        $article->setAuthor("le plus beau de tous les rebeus");
+        $article->setTitle("c'est vendredi");
+        $article->setContent("on a tous la tronche de travers mais on a rien bu");
+        $article->setAuthor("on s'en branle");
         $article->setIsPublished(true);
-        $article->setImage("https://cd1.rap2france.com/public/medias/news/8668/660x330/mdpi/arouf-gangsta-dans-la-sauce-suite-a-des-accusations-de-pedophilie-1609593947.jpg");
+        $article->setImage("https://preview.redd.it/i524xazja9a91.jpg?width=640&crop=smart&auto=webp&s=95e22eef3f44eccdaef081d7dd77130c4adc8030");
         //on balance tous les champs dans la bdd
         $entityManager->persist($article);
         //
         $entityManager->flush();
-        dump($article); die;
+        $this->addFlash('success','article créé');
+
+        return $this->redirectToRoute('admin-articles');
     }
 
     /**
@@ -164,11 +166,13 @@ class AdminArticlesController extends AbstractController {
         if(!is_null($article)){
             $entityManager->remove($article);
             $entityManager->flush();
+            $this->addFlash('success','article supprimé avec succès');
             //redirection vers home
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('admin-articles');
         }else{
             //message d'erreur
-            return ('erreur déjà supprimé');
+            $this->addFlash('success','article déjà supprimé');
+            return $this->redirectToRoute('admin-articles');
         }
     }
 
@@ -185,6 +189,7 @@ class AdminArticlesController extends AbstractController {
         $entityManager->persist($article);
         $entityManager->flush();
         //retour à la page articles
+        $this->addFlash('success','article mis à jour');
         return $this->redirectToRoute('admin-articles');
     }
 }

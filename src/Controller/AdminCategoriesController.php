@@ -31,7 +31,7 @@ class AdminCategoriesController extends AbstractController
     }
 
     /**
-     * @Route("new-category",name="new-category");
+     * @Route("/admin/new-category",name="admin-new-category");
      */
 
     public function newCategory(EntityManagerInterface $entityManager)
@@ -41,17 +41,17 @@ class AdminCategoriesController extends AbstractController
         $category = new Category();
 
         //on utilise les setters pour définir chaque champ
-        $category->setTitle("tinder");
-        $category->setColor("red");
-        $category->setDescription("zééé parti");
+        $category->setTitle("yahourts");
+        $category->setColor("brown");
+        $category->setDescription("miam");
         $category->setIsPublished(true);
 
         //on balance tous les champs dans la bdd
         $entityManager->persist($category);
         //
         $entityManager->flush();
-        dump($category);
-        die;
+        $this->addFlash('success','catégorie créé');
+        return $this->redirectToRoute('admin-categories');
     }
 
     /**
@@ -68,10 +68,13 @@ class AdminCategoriesController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
             //redirection vers home
-            return $this->redirectToRoute('home');
+            $this->addFlash('success','catégorie supprimée avec succès');
+            return $this->redirectToRoute('admin-categories');
         }else{
             //message d'erreur
-            return ('erreur déjà supprimé');
+            $this->addFlash('success','catégorie déjà supprimée');
+            return $this->redirectToRoute('admin-categories');
+
         }
     }
 
@@ -88,6 +91,7 @@ class AdminCategoriesController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
         //retour à la page articles
+        $this->addFlash('success','catégorie mise à jour');
         return $this->redirectToRoute('admin-categories');
     }
 

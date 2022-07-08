@@ -81,3 +81,8 @@ article a:hover{
 .footer-element{
     color: beige;
 }
+
+.alert-message{
+    text-align: center;
+    color: darkgreen;
+}
