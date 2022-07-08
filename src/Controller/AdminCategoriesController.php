@@ -53,4 +53,25 @@ class AdminCategoriesController extends AbstractController
         dump($category);
         die;
     }
+
+    /**
+     * @Route("/admin/categories/delete/{id}",name="admin-delete-category");
+     */
+
+    // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
+    public function deleteArticle($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+        //là on récupère l'id dans la variable article
+        $category = $categoryRepository->find($id);
+
+        //si l'id existe on supprime et on push la différence dans la bdd
+        if(!is_null($category)){
+            $entityManager->remove($category);
+            $entityManager->flush();
+            //redirection vers home
+            return $this->redirectToRoute('home');
+        }else{
+            //message d'erreur
+            return ('erreur déjà supprimé');
+        }
+    }
 }
