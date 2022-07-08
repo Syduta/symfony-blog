@@ -144,7 +144,6 @@ class AdminArticlesController extends AbstractController {
         $article->setAuthor("le plus beau de tous les rebeus");
         $article->setIsPublished(true);
         $article->setImage("https://cd1.rap2france.com/public/medias/news/8668/660x330/mdpi/arouf-gangsta-dans-la-sauce-suite-a-des-accusations-de-pedophilie-1609593947.jpg");
-
         //on balance tous les champs dans la bdd
         $entityManager->persist($article);
         //
@@ -186,6 +185,6 @@ class AdminArticlesController extends AbstractController {
         $entityManager->persist($article);
         $entityManager->flush();
         //retour à la page articles
-        return $this->redirectToRoute('admin/articles');
+        return $this->redirectToRoute('admin-articles');
     }
 }

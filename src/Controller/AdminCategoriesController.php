@@ -74,4 +74,21 @@ class AdminCategoriesController extends AbstractController
             return ('erreur déjà supprimé');
         }
     }
+
+    /**
+     * @Route("/admin/categories/update/{id}",name="admin-update-category");
+     */
+    // on instancie la méthode pour récup l'id avec categoryrepository et la gérer avec entitymanager
+    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+        //là on récupère l'id dans la variable category
+        $category = $categoryRepository->find($id);
+        //on change le titre
+        $category->setTitle("c'est cool quand ça marche");
+        //on push dans la bdd
+        $entityManager->persist($category);
+        $entityManager->flush();
+        //retour à la page articles
+        return $this->redirectToRoute('admin-categories');
+    }
+
 }

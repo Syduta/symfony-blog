@@ -42,10 +42,6 @@ class Article
      */
     private $content;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $kikoulol;
 
     public function getId(): ?int
     {
@@ -108,18 +104,6 @@ class Article
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getKikoulol(): ?string
-    {
-        return $this->kikoulol;
-    }
-
-    public function setKikoulol(string $kikoulol): self
-    {
-        $this->kikoulol = $kikoulol;
 
         return $this;
     }
