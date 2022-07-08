@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticlesController extends AbstractController {
 
     /**
-     * @Route("/article/{id}",name="article");
+     * @Route("/admin/article/{id}",name="admin-article");
      */
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer un article grâce à son id
     public function article(ArticleRepository $articleRepository, $id){
@@ -20,7 +20,7 @@ class ArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/articles",name="articles");
+     * @Route("/admin/articles",name="admin-articles");
      */
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer les articles de la table
     public function articles(ArticleRepository $articleRepository){
@@ -129,7 +129,7 @@ class ArticlesController extends AbstractController {
 //    }
 
     /**
-     * @Route("/new-article",name="new-article");
+     * @Route("/admin/new-article",name="admin-new-article");
      */
 
     //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
@@ -153,7 +153,7 @@ class ArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/articles/delete/{id}",name="delete-article");
+     * @Route("/admin/articles/delete/{id}",name="admin-delete-article");
      */
 
     // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
@@ -174,7 +174,7 @@ class ArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/articles/update/{id}",name="update-article");
+     * @Route("/admin/articles/update/{id}",name="admin-update-article");
      */
     // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
     public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
