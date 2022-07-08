@@ -172,4 +172,20 @@ class ArticlesController extends AbstractController {
             return ('erreur déjà supprimé');
         }
     }
+
+    /**
+     * @Route("/articles/update/{id}",name="update-article");
+     */
+    // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
+        //là on récupère l'id dans la variable article
+        $article = $articleRepository->find($id);
+        //on change le titre
+        $article->setTitle("lourd titre");
+        //on push dans la bdd
+        $entityManager->persist($article);
+        $entityManager->flush();
+        //retour à la page articles
+        return $this->redirectToRoute('articles');
+    }
 }
