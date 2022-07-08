@@ -14,7 +14,7 @@
                 {#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
 {#                <p>citation de {{ article.author }}</p>#}
 {#                <a class="images" href="{{ path('article',{'id':article.id}) }}"><img src="{{ article.image }}" alt="photo du film"></a>#}
-                <a href="{{ path('category',{'id':category.id}) }}">Voir la catégorie</a>
+                <a href="{{ path('admin-category',{'id':category.id}) }}">Voir la catégorie</a>
             </article>
 
         {% endif %}

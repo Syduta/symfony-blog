@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArticlesController extends AbstractController {
+class AdminArticlesController extends AbstractController {
 
     /**
      * @Route("/admin/article/{id}",name="admin-article");
@@ -16,7 +16,7 @@ class ArticlesController extends AbstractController {
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer un article grâce à son id
     public function article(ArticleRepository $articleRepository, $id){
         $article = $articleRepository->find($id);
-        return $this->render('article.html.twig',['article'=>$article]);
+        return $this->render('admin/article.html.twig',['article'=>$article]);
     }
 
     /**
@@ -25,7 +25,7 @@ class ArticlesController extends AbstractController {
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer les articles de la table
     public function articles(ArticleRepository $articleRepository){
         $articles = $articleRepository->findAll();
-        return $this->render('articles.html.twig',['articles'=>$articles]);
+        return $this->render('admin/articles.html.twig',['articles'=>$articles]);
     }
 
 //    /**
@@ -186,6 +186,6 @@ class ArticlesController extends AbstractController {
         $entityManager->persist($article);
         $entityManager->flush();
         //retour à la page articles
-        return $this->redirectToRoute('articles');
+        return $this->redirectToRoute('admin/articles');
     }
 }

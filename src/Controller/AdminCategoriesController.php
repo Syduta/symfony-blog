@@ -9,25 +9,25 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-class CategoriesController extends AbstractController
+class AdminCategoriesController extends AbstractController
 {
 
     /**
-     * @Route("/category/{id}",name="category");
+     * @Route("/admin/category/{id}",name="admin-category");
      */
     // on configure la méthode en l'instanciant avec categoryrepository pour récupérer une category grâce à son id
     public function dataCategory(CategoryRepository $categoryRepository,$id){
         $category = $categoryRepository->find($id);
-        return $this->render('category.html.twig',['category'=>$category]);
+        return $this->render('admin/category.html.twig',['category'=>$category]);
     }
 
     /**
-     * @Route("/categories",name="categories");
+     * @Route("/admin/categories",name="admin-categories");
      */
     // on configure la méthode en l'instanciant avec categoryrepository pour récupérer entièrement la table category
     public function dataCategories(CategoryRepository $categoryRepository){
         $categories = $categoryRepository->findAll();
-        return $this->render('categories.html.twig',['categories'=>$categories]);
+        return $this->render('admin/categories.html.twig',['categories'=>$categories]);
     }
 
     /**
