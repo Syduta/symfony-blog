@@ -43,15 +43,16 @@ class AdminCategoriesController extends AbstractController
         $category = new Category();
         //avec $form on pourra créer un formulaire dont les champs répondront à la table category
         $form = $this->createForm(CategoryType::class, $category);
-        // on retourne sur le fichier twig associé le formulaire 'form'
+        // on utilise une instance de la classe request pour que les données des inputs soient set sur $category directement
         $form->handleRequest($request);
-
+        // si le formulaire soumis est valide on l'enregistre dans la bdd
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($category);
 
             $entityManager->flush();
             $this->addFlash('success', 'catégorie créée');
         }
+        // on retourne sur le fichier twig associé le formulaire 'form'
         return $this->render("/admin/new-category.html.twig",['form'=>$form->createView()]);
     }
 

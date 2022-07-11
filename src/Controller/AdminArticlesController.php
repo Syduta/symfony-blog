@@ -142,9 +142,9 @@ class AdminArticlesController extends AbstractController {
         $article = new Article();
         //avec $form on pourra créer un formulaire dont les champs répondront à la table article
         $form = $this->createForm(ArticleType::class, $article);
-        // on retourne sur le fichier twig associé le formulaire 'form'
+        // on utilise une instance de la classe request pour que les données des inputs soient set sur $article directement
         $form->handleRequest($request);
-
+        // si le formulaire soumis est valide on l'enregistre dans la bdd
         if($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($article);
 
@@ -153,6 +153,7 @@ class AdminArticlesController extends AbstractController {
 
 
             }
+        // on retourne sur le fichier twig associé le formulaire 'form'
         return $this->render("/admin/new-article.html.twig",['form'=>$form->createView()]);
     }
 //
