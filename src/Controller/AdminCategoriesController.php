@@ -47,9 +47,9 @@ class AdminCategoriesController extends AbstractController
             $category = new Category();
             //qui aura pour champs nos données du formulaire que l'on défini avec set
             //et que l'on sécurise un minimum avec $newstr = filter_var($str, FILTER_SANITIZE_STRING);
-            $category->setTitle(filter_var($title,FILTER_SANITIZE_STRING));
-            $category->setColor($color);
-            $category->setDescription(filter_var($description,FILTER_SANITIZE_STRING));
+            $category->setTitle(filter_var($title,FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+            $category->setColor(filter_var($color, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+            $category->setDescription(filter_var($description,FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
             $category->setIsPublished(true);
             //on envoit dans la bdd
             $entityManager->persist($category);
