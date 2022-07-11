@@ -150,7 +150,8 @@ class AdminArticlesController extends AbstractController {
         $entityManager->flush();
         $this->addFlash('success','article créé');
 
-        return $this->redirectToRoute('admin-articles');
+        return $this->render('admin/new-article.html.twig');
+//        return $this->redirectToRoute('admin-articles');
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 class AdminCategoriesController extends AbstractController
 {
@@ -33,25 +34,43 @@ class AdminCategoriesController extends AbstractController
     /**
      * @Route("/admin/new-category",name="admin-new-category");
      */
-
-    public function newCategory(EntityManagerInterface $entityManager)
+        //on associe request à l'entitymanager pour récupérer les données du formulaire
+    public function newCategory(EntityManagerInterface $entityManager, Request $request)
     {
 
-        //avec $category on crée une nouvelle catégorie grâce à l'instance new Category
-        $category = new Category();
+        //on défini des variables avec les valeurs de chaque champ
+        $title = $request->query->get('title');
+        $color = $request->query->get('color');
+        $description = $request->query->get('description');
+        //si aucun des champs n'est vide on crée une nouvelle catégorie
+        if(!empty($title) && !empty($description) && !empty($color)){
+            $category = new Category();
+
+            //qui aura pour champs nos données du formulaire que l'on défini avec set
+            $category->setTitle($title);
+            $category->setColor($color);
+            $category->setDescription($description);
+            $category->setIsPublished(true);
+            //on envoit dans la bdd
+            $entityManager->persist($category);
+            $entityManager->flush();
+            //message confirmant la création d'une catégorie
+            $this->addFlash('success', 'Vous avez bien ajouté la catégorie !');
+            return $this->redirectToRoute("admin-categories");
+
+        }
+        //message d'erreurs pour ceux qui lisent pas les conditions :p
+        $this->addFlash('error', 'Merci de remplir le titre, la couleur et le contenu !');
+        return $this->render('/admin/new-category.html.twig');
 
         //on utilise les setters pour définir chaque champ
-        $category->setTitle("yahourts");
-        $category->setColor("brown");
-        $category->setDescription("miam");
-        $category->setIsPublished(true);
 
         //on balance tous les champs dans la bdd
-        $entityManager->persist($category);
+//        $entityManager->persist($category);
         //
-        $entityManager->flush();
-        $this->addFlash('success','catégorie créé');
-        return $this->redirectToRoute('admin-categories');
+//        $entityManager->flush();
+//        $this->addFlash('success','catégorie créé');
+//        return $this->redirectToRoute('admin-categories');
     }
 
     /**

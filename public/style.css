@@ -86,3 +86,8 @@ article a:hover{
     text-align: center;
     color: darkgreen;
 }
+
+.alert-error{
+    text-align: center;
+    color: darkred;
+}

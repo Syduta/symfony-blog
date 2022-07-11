@@ -4,11 +4,7 @@
 
 {% block main %}
     {#    ce qui suit est assemblé avec base#}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            <h2 class="alert-message">{{ message }}</h2>
-        </div>
-    {% endfor %}
+
 
 {% for article in articles  %}
     {% if article.isPublished  %}
