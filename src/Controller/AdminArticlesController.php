@@ -137,12 +137,22 @@ class AdminArticlesController extends AbstractController {
 
 
 //    //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
-    public function newArticle(EntityManagerInterface $entityManager){
+    public function newArticle(EntityManagerInterface $entityManager, Request $request){
         //avec $article on crée un nouvel article grâce à l'instance new article
         $article = new Article();
         //avec $form on pourra créer un formulaire dont les champs répondront à la table article
         $form = $this->createForm(ArticleType::class, $article);
         // on retourne sur le fichier twig associé le formulaire 'form'
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($article);
+
+            $entityManager->flush();
+            $this->addFlash('success','article créé');
+
+
+            }
         return $this->render("/admin/new-article.html.twig",['form'=>$form->createView()]);
     }
 //

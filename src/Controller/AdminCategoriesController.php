@@ -38,12 +38,20 @@ class AdminCategoriesController extends AbstractController
      */
 
     //    //on crée l'instance newCategory, entitymanager servira pour faire suivre le contenu dans la bdd
-    public function newCategory(EntityManagerInterface $entityManager){
+    public function newCategory(EntityManagerInterface $entityManager, Request $request){
         //avec $category on crée une nouvelle catégorie grâce à l'instance new category
         $category = new Category();
         //avec $form on pourra créer un formulaire dont les champs répondront à la table category
         $form = $this->createForm(CategoryType::class, $category);
         // on retourne sur le fichier twig associé le formulaire 'form'
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($category);
+
+            $entityManager->flush();
+            $this->addFlash('success', 'catégorie créée');
+        }
         return $this->render("/admin/new-category.html.twig",['form'=>$form->createView()]);
     }
 
