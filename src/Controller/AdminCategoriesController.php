@@ -45,8 +45,8 @@ class AdminCategoriesController extends AbstractController
         //si aucun des champs n'est vide on crée une nouvelle catégorie
         if(!empty($title) && !empty($description) && !empty($color)){
             $category = new Category();
-            //$newstr = filter_var($str, FILTER_SANITIZE_STRING);
             //qui aura pour champs nos données du formulaire que l'on défini avec set
+            //et que l'on sécurise un minimum avec $newstr = filter_var($str, FILTER_SANITIZE_STRING);
             $category->setTitle(filter_var($title,FILTER_SANITIZE_STRING));
             $category->setColor($color);
             $category->setDescription(filter_var($description,FILTER_SANITIZE_STRING));
