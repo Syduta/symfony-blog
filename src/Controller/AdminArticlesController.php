@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminArticlesController extends AbstractController {
@@ -132,27 +134,36 @@ class AdminArticlesController extends AbstractController {
      * @Route("/admin/new-article",name="admin-new-article");
      */
 
-    //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
-    public function newArticle(EntityManagerInterface $entityManager){
 
+
+//    //on crée l'instance newArticle, entitymanager servira pour faire suivre le contenu dans la bdd
+    public function newArticle(EntityManagerInterface $entityManager){
         //avec $article on crée un nouvel article grâce à l'instance new article
         $article = new Article();
-
-        //on utilise les setters pour définir chaque champ
-        $article->setTitle("c'est vendredi");
-        $article->setContent("on a tous la tronche de travers mais on a rien bu");
-        $article->setAuthor("on s'en branle");
-        $article->setIsPublished(true);
-        $article->setImage("https://preview.redd.it/i524xazja9a91.jpg?width=640&crop=smart&auto=webp&s=95e22eef3f44eccdaef081d7dd77130c4adc8030");
-        //on balance tous les champs dans la bdd
-        $entityManager->persist($article);
-        //
-        $entityManager->flush();
-        $this->addFlash('success','article créé');
-
-        return $this->render('admin/new-article.html.twig');
-//        return $this->redirectToRoute('admin-articles');
+        //avec $form on pourra créer un formulaire dont les champs répondront à la table article
+        $form = $this->createForm(ArticleType::class, $article);
+        // on retourne sur le fichier twig associé le formulaire 'form'
+        return $this->render("/admin/new-article.html.twig",['form'=>$form->createView()]);
     }
+//
+//        //avec $article on crée un nouvel article grâce à l'instance new article
+//        $article = new Article();
+//
+//        //on utilise les setters pour définir chaque champ
+//        $article->setTitle("c'est vendredi");
+//        $article->setContent("on a tous la tronche de travers mais on a rien bu");
+//        $article->setAuthor("on s'en branle");
+//        $article->setIsPublished(true);
+//        $article->setImage("https://preview.redd.it/i524xazja9a91.jpg?width=640&crop=smart&auto=webp&s=95e22eef3f44eccdaef081d7dd77130c4adc8030");
+//        //on balance tous les champs dans la bdd
+//        $entityManager->persist($article);
+//        //
+//        $entityManager->flush();
+//        $this->addFlash('success','article créé');
+//
+//        return $this->render('admin/new-article.html.twig');
+////        return $this->redirectToRoute('admin-articles');
+    //}
 
     /**
      * @Route("/admin/articles/delete/{id}",name="admin-delete-article");
