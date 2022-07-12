@@ -12,7 +12,10 @@
 
         <article>
             <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
-            <p>{{ category.description }}</p>
+            {% for article in category.articles %}
+                <p>{{ article.title }}</p>
+            {% endfor %}
+{#            <p>{{ category.description }}</p>#}
             {#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
 {#            <p>citation de {{ article.author }}</p>#}
 {#            <img src="{{ article.image }}" alt="photo du film">#}

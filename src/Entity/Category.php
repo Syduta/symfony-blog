@@ -37,6 +37,37 @@ class Category
      */
     private $isPublished;
 
+    //on veut qu'une catégorie puisse avoir plusieurs articles
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+
+    private $articles;
+    //comme on doit pouvoir garder en mémoire plusieurs articles pour une catégorie
+    //on crée un tableau pour les stocker
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+//    /**
+//     * @return mixed
+//     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+//    /**
+//     * @param mixed $articles
+//     */
+    public function setArticles($articles): void
+    {
+        $this->articles = $articles;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
