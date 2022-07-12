@@ -92,3 +92,12 @@ article a:hover{
     text-align: center;
     color: darkred;
 }
+
+.label{
+    font-weight: bolder;
+    color: chocolate;
+}
+
+.container-fluid{
+    margin: 2rem;
+}
