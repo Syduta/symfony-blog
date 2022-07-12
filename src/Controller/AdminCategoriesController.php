@@ -122,18 +122,30 @@ class AdminCategoriesController extends AbstractController
     /**
      * @Route("/admin/categories/update/{id}",name="admin-update-category");
      */
-    // on instancie la méthode pour récup l'id avec categoryrepository et la gérer avec entitymanager
-    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+    // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
+    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request){
         //là on récupère l'id dans la variable category
         $category = $categoryRepository->find($id);
-        //on change le titre
-        $category->setTitle("c'est cool quand ça marche");
-        //on push dans la bdd
-        $entityManager->persist($category);
-        $entityManager->flush();
-        //retour à la page articles
-        $this->addFlash('success','catégorie mise à jour');
-        return $this->redirectToRoute('admin-categories');
+        $form = $this->createForm(CategoryType::class,$category);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success','article modifié');
+        }
+        return $this->render("admin/update-category.html.twig",['form'=>$form->createView()]);
+//    // on instancie la méthode pour récup l'id avec categoryrepository et la gérer avec entitymanager
+//    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+//        //là on récupère l'id dans la variable category
+//        $category = $categoryRepository->find($id);
+//        //on change le titre
+//        $category->setTitle("c'est cool quand ça marche");
+//        //on push dans la bdd
+//        $entityManager->persist($category);
+//        $entityManager->flush();
+//        //retour à la page articles
+//        $this->addFlash('success','catégorie mise à jour');
+//        return $this->redirectToRoute('admin-categories');
     }
 
 }

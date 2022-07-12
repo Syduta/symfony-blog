@@ -203,16 +203,24 @@ class AdminArticlesController extends AbstractController {
      * @Route("/admin/articles/update/{id}",name="admin-update-article");
      */
     // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request){
         //là on récupère l'id dans la variable article
         $article = $articleRepository->find($id);
+        $form = $this->createForm(ArticleType::class,$article);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $this->addFlash('success','article modifié');
+        }
+        return $this->render("admin/update-article.html.twig",['form'=>$form->createView()]);
         //on change le titre
-        $article->setTitle("lourd titre");
-        //on push dans la bdd
-        $entityManager->persist($article);
-        $entityManager->flush();
-        //retour à la page articles
-        $this->addFlash('success','article mis à jour');
-        return $this->redirectToRoute('admin-articles');
+//        $article->setTitle("lourd titre");
+//        //on push dans la bdd
+//        $entityManager->persist($article);
+//        $entityManager->flush();
+//        //retour à la page articles
+//        $this->addFlash('success','article mis à jour');
+//        return $this->redirectToRoute('admin-articles');
     }
 }

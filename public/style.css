@@ -32,7 +32,7 @@ p{
 
 .images img{
     /*height: 80vh;*/
-    width: 80vw;
+    width: 50vw;
 }
 
 nav{
@@ -59,6 +59,7 @@ article{
 h2{
     margin: 1.5rem 0;
     font-size: 2rem;
+    color: brown;
 }
 
 article a{
