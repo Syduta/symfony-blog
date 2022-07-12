@@ -14,7 +14,7 @@
             {% if article.category %}
                 <p>{{ article.category.title }}</p>
             {% else %}
-                <p>Pas de catégorie</p>
+                <p class="alert-error">Pas de catégorie</p>
             {% endif %}
             <p>{{ article.content }}</p>
 {#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}
