@@ -42,8 +42,10 @@ class Article
      */
     private $content;
 
+
+    //on veut que plusieurs articles puissent être de la même catégorie avec foreign key
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
 

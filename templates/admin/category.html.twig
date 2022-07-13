@@ -11,9 +11,11 @@
     {% if category.isPublished  %}
 
         <article>
-            <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
+            <h2 style="color: {{ category.color }}">Catégorie: {{ category.title }}</h2>
+{#            category.articles = le tableau des articles par catégorie#}
             {% for article in category.articles %}
-                <p>{{ article.title }}</p>
+                <h2>{{ article.title }}</h2>
+                <a href="{{ path('admin-article',{'id':article.id}) }}">Voir l'article</a>
             {% endfor %}
 {#            <p>{{ category.description }}</p>#}
             {#            <p>posté le {{ article.publishedAt|date ('d-M-y') }}</p>#}

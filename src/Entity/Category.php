@@ -37,7 +37,7 @@ class Category
      */
     private $isPublished;
 
-    //on veut qu'une catégorie puisse avoir plusieurs articles
+    //on veut qu'une catégorie puisse avoir plusieurs articles grâce à foreign key.
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */

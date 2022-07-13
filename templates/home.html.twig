@@ -4,13 +4,13 @@
 {% block main %}
 {#    ce qui suit est assemblé avec base#}
 
-<form action="{{ path('home') }}" method="get">
-    <label for="name"></label>
-    <input type="text" name="name" placeholder="Votre nom">
-    <label for="age"></label>
-    <input type="text" name="age" placeholder="Votre âge">
-    <button>Envoyer</button>
-</form>
+{#<form action="{{ path('home') }}" method="get">#}
+{#    <label for="name"></label>#}
+{#    <input type="text" name="name" placeholder="Votre nom">#}
+{#    <label for="age"></label>#}
+{#    <input type="text" name="age" placeholder="Votre âge">#}
+{#    <button>Envoyer</button>#}
+{#</form>#}
 
 {% for article in articles  %}
 {#    |slice(1)#}
