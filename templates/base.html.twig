@@ -14,12 +14,12 @@
 <body>
 {% for message in app.flashes('success') %}
     <div class="alert alert-success">
-        <h2 class="alert-message">{{ message }}</h2>
+        <h2 class="alert-success">{{ message }}</h2>
     </div>
 {% endfor %}
 {% for message in app.flashes('error') %}
     <div class="alert alert-error">
-        <h2 class="alert-message">{{ message }}</h2>
+        <h2 class="alert-error">{{ message }}</h2>
     </div>
 {% endfor %}
 <header>
@@ -30,6 +30,12 @@
             <li><a href="{{ path('admin-categories') }}">Liste des catégories</a></li>
             <li><a href="{{ path('admin-new-article') }}">Créer article</a></li>
             <li><a href="{{ path('admin-new-category') }}">Créer catégorie</a></li>
+            <li>
+            <form action="{{ path('admin-articles-search') }}" method="get">
+                <input type="text" name="search" placeholder="Votre recherche">
+                <input type="submit">
+            </form>
+            </li>
         </ul>
     </nav>
 </header>
@@ -44,11 +50,11 @@
             <li><a href="{{ path('home') }}">Accueil</a></li>
             <li><a href="{{ path('admin-articles') }}">Liste des articles</a></li>
             <li><a href="{{ path('admin-categories') }}">Liste des categories</a></li>
+        </ul>
+    </nav>
     {% block footer %}
             <li class="footer-element">Symfoblog</li>
     {% endblock %}
-        </ul>
-    </nav>
 
 </footer>
 

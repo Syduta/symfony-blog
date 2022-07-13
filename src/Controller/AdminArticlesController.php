@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminArticlesController extends AbstractController {
 
     /**
-     * @Route("/admin/article/{id}",name="admin-article");
+     * @Route("/admin/article/{id}",name="admin-article")
      */
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer un article grâce à son id
     public function article(ArticleRepository $articleRepository, $id){
@@ -22,7 +22,7 @@ class AdminArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/articles",name="admin-articles");
+     * @Route("/admin/articles",name="admin-articles")
      */
     // on configure la méthode en l'instanciant avec articlerepository pour récupérer les articles de la table
     public function articles(ArticleRepository $articleRepository){
@@ -131,7 +131,7 @@ class AdminArticlesController extends AbstractController {
 //    }
 
     /**
-     * @Route("/admin/new-article",name="admin-new-article");
+     * @Route("/admin/new-article",name="admin-new-article")
      */
 
 
@@ -177,7 +177,7 @@ class AdminArticlesController extends AbstractController {
     //}
 
     /**
-     * @Route("/admin/articles/delete/{id}",name="admin-delete-article");
+     * @Route("/admin/articles/delete/{id}",name="admin-delete-article")
      */
 
     // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
@@ -200,20 +200,49 @@ class AdminArticlesController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/articles/update/{id}",name="admin-update-article");
+     * @Route("/admin/articles/update/{id}",name="admin-update-article")
      */
     // on instancie la méthode pour récup l'id avec articlerepository et la gérer avec entitymanager
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request){
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
+    {
         //là on récupère l'id dans la variable article
         $article = $articleRepository->find($id);
-        $form = $this->createForm(ArticleType::class,$article);
+        $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        if($form->isSubmitted()&&$form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($article);
             $entityManager->flush();
-            $this->addFlash('success','article modifié');
+            $this->addFlash('success', 'article modifié');
         }
-        return $this->render("admin/update-article.html.twig",['form'=>$form->createView()]);
+        return $this->render("admin/update-article.html.twig", ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/articles/search", name="admin-articles-search")
+     */
+
+    public function searchArticles(Request $request, ArticleRepository $articleRepository){
+        // je récupère les valeurs du formulaire dans ma route
+        $search = $request->query->get('search');
+
+        // je vais créer une méthode dans l'ArticleRepository
+        // qui trouve un article en fonction d'un mot dans son titre ou son contenu
+        $articles = $articleRepository->searchByWord($search);
+
+        if(!empty($articles)){
+
+        // je renvoie un fichier twig en lui passant les articles trouvé
+        // et je les affiche
+
+        return $this->render('admin/articles-search.html.twig', ['articles' => $articles]);
+        }else{
+            //sinon message d'erreur on redirige vers home
+            $this->addFlash('error', 'Votre recherche n\'a rien donné');
+            return $this->redirectToRoute('home');
+        }
+
+    }
+
         //on change le titre
 //        $article->setTitle("lourd titre");
 //        //on push dans la bdd
@@ -222,5 +251,5 @@ class AdminArticlesController extends AbstractController {
 //        //retour à la page articles
 //        $this->addFlash('success','article mis à jour');
 //        return $this->redirectToRoute('admin-articles');
-    }
+
 }
