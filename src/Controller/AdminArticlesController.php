@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -221,20 +222,25 @@ class AdminArticlesController extends AbstractController {
      * @Route("/admin/articles/search", name="admin-articles-search")
      */
 
-    public function searchArticles(Request $request, ArticleRepository $articleRepository){
+    public function searchArticles(Request $request, ArticleRepository $articleRepository, CategoryRepository $categoryRepository){
         // je récupère les valeurs du formulaire dans ma route
         $search = $request->query->get('search');
 
         // je vais créer une méthode dans l'ArticleRepository
         // qui trouve un article en fonction d'un mot dans son titre ou son contenu
         $articles = $articleRepository->searchByWord($search);
+        $categories = $categoryRepository->searchByWord($search);
 
-        if(!empty($articles)){
+
+        if((!empty($articles))||(!empty($categories))){
 
         // je renvoie un fichier twig en lui passant les articles trouvé
         // et je les affiche
 
-        return $this->render('admin/articles-search.html.twig', ['articles' => $articles]);
+        return $this->render('admin/articles-search.html.twig', [
+            'articles' => $articles,
+            'categories' => $categories
+        ]);
         }else{
             //sinon message d'erreur on redirige vers home
             $this->addFlash('error', 'Votre recherche n\'a rien donné');

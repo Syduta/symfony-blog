@@ -148,4 +148,30 @@ class AdminCategoriesController extends AbstractController
 //        return $this->redirectToRoute('admin-categories');
     }
 
+//    /**
+//     * @Route("/admin/categories/search", name="admin-categories-search")
+//     */
+//
+//    public function searchCategories(Request $request, CategoryRepository $categoryRepository)
+//    {
+//        // je récupère les valeurs du formulaire dans ma route
+//        $search = $request->query->get('search');
+//
+//        // je vais créer une méthode dans l'CategoryRepository
+//        // qui trouve une catégorie en fonction d'un mot dans son titre ou son contenu
+//        $categories = $categoryRepository->searchByWord($search);
+//
+//        if (!empty($categories)) {
+//
+//            // je renvoie un fichier twig en lui passant les articles trouvé
+//            // et je les affiche
+//
+//            return $this->render('admin/categories-search.html.twig', ['categories' => $categories]);
+//        } else {
+//            //sinon message d'erreur on redirige vers home
+//            $this->addFlash('error', 'Votre recherche n\'a rien donné');
+//            return $this->redirectToRoute('home');
+//        }
+//    }
+
 }

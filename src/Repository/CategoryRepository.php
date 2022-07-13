@@ -39,6 +39,32 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByWord($search){
+        // je récupére le query builder
+        // c'est un objet qui me permet de créer
+        // des requêtes SQL, mais en PHP
+        $qb = $this->createQueryBuilder('category');
+
+        // j'utilise le constructeur de requête
+        // pour faire un select sur la table article
+        $query = $qb->select('category')
+            // je récupère les article dont le titre
+            // correspond à :word
+            ->where('category.title LIKE :search')
+            // je défini la valeur de :word
+            // en lui disant que le mot, peut contenir des
+            // caractères avant et après, il sera quand meme trouvé
+            // je le fais en deux étapes avec setParametre
+            // ça permet à Doctrine et symfo de sécuriser
+            // la variable $word
+            ->setParameter('search', '%'.$search.'%')
+            // je récupère la requête générée
+            ->getQuery();
+
+        // je l'execute en bdd et je récupère les résultats
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */
