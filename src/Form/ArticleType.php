@@ -24,7 +24,11 @@ class ArticleType extends AbstractType
             // entitytype sert à gérer la relation vers une entité
             //et je parametre mon input pour qu'il affiche toutes les catégories
             // de la bdd avec leur titre dans les options du select
-            ->add('category',EntityType::class,['class'=>Category::class,'choice_label'=>'title'])
+            ->add('category',EntityType::class, [
+                    'class'=>Category::class,
+                    'choice_label'=>'title',
+                    'placeholder'=>'Choisissez une catégorie',
+                ])
             ->add('submit',SubmitType::class)
 
         ;
